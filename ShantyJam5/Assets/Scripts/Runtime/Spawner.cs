@@ -9,8 +9,6 @@ public class Spawner : MonoBehaviour
 {
     public enum SpawnState {SPAWNING, WAITING, COUNTING};
 
-    //public Transform[] _locations = null;
-
     [System.Serializable]
     public class Wave
     {
@@ -32,12 +30,7 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // int randomIndex = Random.Range(0, _locations.Length);
-        //Transform randomTransform = _locations[randomIndex];
-        //Debug.Log(randomTransform.name);
-
         waveCountdown = timeBetweenWaves;
-
     }
 
     void Update()
