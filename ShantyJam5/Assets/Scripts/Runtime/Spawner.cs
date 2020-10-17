@@ -90,7 +90,7 @@ public class Spawner : MonoBehaviour
         if (searchCountdown <= 0f)
         {
             searchCountdown = 1f;
-            if (GameObject.FindGameObjectsWithTag("Consumable").Length == 0)
+            if (GameObject.FindGameObjectWithTag("Consumable") == null)
             {
                 return false;
             }
