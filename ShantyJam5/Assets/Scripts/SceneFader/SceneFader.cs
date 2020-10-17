@@ -2,15 +2,21 @@ using System.Collections;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Game/SceneFader")]
-public class SceneFader : ScriptableObject
+public class SceneFader : MonoBehaviour
 {
+    [SerializeField] ImageMaterialFloatDriver _fadeDriver = null;
+    [SerializeField] ImageMaterialFloatDriver _flipDriver = null;
+    [SerializeField] float _fadeTime = 0.5f;
+
     public IEnumerator FadeSceneOut()
     {
-        yield return new WaitForSeconds(1f);
+        _flipDriver.SetFloat(1f);
+        yield return _fadeDriver.SetFloatAsync(1f, _fadeTime); 
     }
 
     public IEnumerator FadeSceneIn()
     {
-        yield return new WaitForSeconds(1f);
+        _flipDriver.SetFloat(0f);
+        yield return _fadeDriver.SetFloatAsync(0f, _fadeTime); 
     }
 }

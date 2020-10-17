@@ -7,6 +7,7 @@ public class SceneFaderAsset : ScriptableObject
 {
     const float _fadeTime = 1f;
     [SerializeField] GameObject _fader = null;
+    [SerializeField] float _waitDelay = 0.3f;
 
     static bool _currentlyLoadingScene = false;
 
@@ -24,6 +25,7 @@ public class SceneFaderAsset : ScriptableObject
         var sceneFader = fader.GetComponent<SceneFader>();
         yield return sceneFader.FadeSceneOut();
         yield return SceneManager.LoadSceneAsync(scene);
+        yield return new WaitForSeconds(_waitDelay);
         yield return sceneFader.FadeSceneIn();
         Destroy(fader);
         _currentlyLoadingScene = false;
