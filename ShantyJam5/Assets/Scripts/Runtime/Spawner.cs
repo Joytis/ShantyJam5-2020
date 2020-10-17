@@ -47,6 +47,7 @@ public class Spawner : MonoBehaviour
             if (!wormIsAlive())
             {
                 //BEGIN NEW WAVE
+                waveCompleted();
                 Debug.Log("Wave completed!");
                 return;
             } else
@@ -65,6 +66,21 @@ public class Spawner : MonoBehaviour
         } else
         {
             waveCountdown -= Time.deltaTime;
+        }
+    }
+
+    void waveCompleted()
+    {
+        state = SpawnState.COUNTING;
+        waveCountdown = timeBetweenWaves;
+        if (nextWave + 1 > waves.Length - 1)
+        {
+            nextWave = 0;
+            Debug.Log("All waves completed. Looping waves...");
+        }
+        else
+        {
+            nextWave++;
         }
     }
 
@@ -101,7 +117,8 @@ public class Spawner : MonoBehaviour
     void SpawnWorm(Transform _worm)
     {
         //Spawn an enemy
-        Instantiate(_worm, transform.position, transform.rotation);
+        Transform _sp = _locations[Random.Range(0, _locations.Length)];
+        Instantiate(_worm, _sp.position, _sp.rotation);
         Debug.Log("Spawning an enemy!!");
     }
 }
