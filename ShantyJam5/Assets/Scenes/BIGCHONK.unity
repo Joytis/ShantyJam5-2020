@@ -11420,10 +11420,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a27e0fe2db0745547acbda0524999a77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GirthodometerText: {fileID: 1892781536}
-  PivotPoint: {fileID: 914107061}
-  min: 0
-  max: 100
 --- !u!1 &410046307
 GameObject:
   m_ObjectHideFlags: 0

@@ -31,9 +31,18 @@ public class Girthodometer : MonoBehaviour
     public float min = 0, max = 100;    
 
 
-    private void OnEnable() => Consumable.ThingConsumed += OnThingConsumed;
-    private void OnDisable() => Consumable.ThingConsumed -= OnThingConsumed;
-    private void OnThingConsumed(Consumable consumable) => AddGirth(consumable.GrithValue);
+    private void OnEnable() 
+    {
+        Consumable.ThingConsumed += OnThingConsumed;
+    }
+    private void OnDisable() 
+    {
+        Consumable.ThingConsumed -= OnThingConsumed;
+    }
+    private void OnThingConsumed(Consumable consumable) 
+    {
+        AddGirth(consumable.GrithValue);
+    }
 
     public void AddGirth(float amt)
     {
