@@ -9,8 +9,6 @@ public class Spawner : MonoBehaviour
 {
     public enum SpawnState {SPAWNING, WAITING, COUNTING};
 
-    [SerializeField] Transform[] _locations = null;
-
     [System.Serializable]
     public class Wave
     {
@@ -26,17 +24,13 @@ public class Spawner : MonoBehaviour
     public float timeBetweenWaves = 5f;
     public float waveCountdown = 0f;
     private float searchCountdown = 1f;
+    public Transform[] _locations = null;
     private SpawnState state = SpawnState.COUNTING;
 
     // Start is called before the first frame update
     void Start()
     {
-        int randomIndex = Random.Range(0, _locations.Length);
-        Transform randomTransform = _locations[randomIndex];
-        Debug.Log(randomTransform.name);
-
         waveCountdown = timeBetweenWaves;
-
     }
 
     void Update()
@@ -47,24 +41,40 @@ public class Spawner : MonoBehaviour
             if (!wormIsAlive())
             {
                 //BEGIN NEW WAVE
-                Debug.Log("Wave completed!");
-                return;
+                waveCompleted();
             } else
             {
                 return;
             }
         }
 
-        if (waveCountdown <= 0)
+        if (waveCountdown <= 0f)
         {
             if (state != SpawnState.SPAWNING)
             {
                 //START SPAWMING WAVE
                 StartCoroutine(SpawnWave(waves[nextWave]));
+                searchCountdown = timeBetweenWaves;
             }
         } else
         {
             waveCountdown -= Time.deltaTime;
+        }
+    }
+
+    void waveCompleted()
+    {
+        Debug.Log("Wave completed!");
+        state = SpawnState.COUNTING;
+        waveCountdown = timeBetweenWaves;
+        if (nextWave + 1 > waves.Length - 1)
+        {
+            nextWave = 0;
+            Debug.Log("All waves completed. Looping waves...");
+        }
+        else
+        {
+            nextWave++;
         }
     }
 
@@ -74,7 +84,7 @@ public class Spawner : MonoBehaviour
         if (searchCountdown <= 0f)
         {
             searchCountdown = 1f;
-            if (GameObject.FindGameObjectsWithTag("Consumable").Length == 0)
+            if (GameObject.FindGameObjectWithTag("Consumable") == null)
             {
                 return false;
             }
@@ -84,7 +94,7 @@ public class Spawner : MonoBehaviour
 
     IEnumerator SpawnWave(Wave _wave)
     {
-        Debug.Log("Spawning Wave");
+        Debug.Log("Spawning Wave" + _wave.name);
         state = SpawnState.SPAWNING;
         //Spawn
         for (int i = 0; i < _wave.count; i++)
@@ -101,7 +111,12 @@ public class Spawner : MonoBehaviour
     void SpawnWorm(Transform _worm)
     {
         //Spawn an enemy
-        Instantiate(_worm, transform.position, transform.rotation);
-        Debug.Log("Spawning an enemy!!");
+        if (_locations.Length == 0)
+        {
+            Debug.Log("ERROR, NO SPAWN POINTS");
+        }
+        Transform _sp = _locations[Random.Range(0, _locations.Length)];
+        Instantiate(_worm, _sp.position, _sp.rotation);
+        Debug.Log("Spawning a worm!!");
     }
 }

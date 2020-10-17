@@ -2,8 +2,6 @@
 using UnityEngine;
 public class GameManager : MonoBehaviour
 {
-    
-
     // Static Variables
     public static GameManager instance;
     // // Event delegates
