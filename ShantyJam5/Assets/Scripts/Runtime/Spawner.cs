@@ -9,7 +9,7 @@ public class Spawner : MonoBehaviour
 {
     public enum SpawnState {SPAWNING, WAITING, COUNTING};
 
-    [SerializeField] Transform[] _locations = null;
+    //public Transform[] _locations = null;
 
     [System.Serializable]
     public class Wave
@@ -26,14 +26,15 @@ public class Spawner : MonoBehaviour
     public float timeBetweenWaves = 5f;
     public float waveCountdown = 0f;
     private float searchCountdown = 1f;
+    public Transform[] _locations = null;
     private SpawnState state = SpawnState.COUNTING;
 
     // Start is called before the first frame update
     void Start()
     {
-        int randomIndex = Random.Range(0, _locations.Length);
-        Transform randomTransform = _locations[randomIndex];
-        Debug.Log(randomTransform.name);
+        // int randomIndex = Random.Range(0, _locations.Length);
+        //Transform randomTransform = _locations[randomIndex];
+        //Debug.Log(randomTransform.name);
 
         waveCountdown = timeBetweenWaves;
 
@@ -48,20 +49,19 @@ public class Spawner : MonoBehaviour
             {
                 //BEGIN NEW WAVE
                 waveCompleted();
-                Debug.Log("Wave completed!");
-                return;
             } else
             {
                 return;
             }
         }
 
-        if (waveCountdown <= 0)
+        if (waveCountdown <= 0f)
         {
             if (state != SpawnState.SPAWNING)
             {
                 //START SPAWMING WAVE
                 StartCoroutine(SpawnWave(waves[nextWave]));
+                searchCountdown = timeBetweenWaves;
             }
         } else
         {
@@ -71,6 +71,7 @@ public class Spawner : MonoBehaviour
 
     void waveCompleted()
     {
+        Debug.Log("Wave completed!");
         state = SpawnState.COUNTING;
         waveCountdown = timeBetweenWaves;
         if (nextWave + 1 > waves.Length - 1)
@@ -100,7 +101,7 @@ public class Spawner : MonoBehaviour
 
     IEnumerator SpawnWave(Wave _wave)
     {
-        Debug.Log("Spawning Wave");
+        Debug.Log("Spawning Wave" + _wave.name);
         state = SpawnState.SPAWNING;
         //Spawn
         for (int i = 0; i < _wave.count; i++)
@@ -117,8 +118,12 @@ public class Spawner : MonoBehaviour
     void SpawnWorm(Transform _worm)
     {
         //Spawn an enemy
+        if (_locations.Length == 0)
+        {
+            Debug.Log("ERROR, NO SPAWN POINTS");
+        }
         Transform _sp = _locations[Random.Range(0, _locations.Length)];
         Instantiate(_worm, _sp.position, _sp.rotation);
-        Debug.Log("Spawning an enemy!!");
+        Debug.Log("Spawning a worm!!");
     }
 }
