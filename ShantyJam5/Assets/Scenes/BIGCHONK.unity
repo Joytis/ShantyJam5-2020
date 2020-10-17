@@ -11454,15 +11454,15 @@ MonoBehaviour:
   - {fileID: 205046508}
   waves:
   - name: Wormsss
-    worm: {fileID: 0}
+    worm: {fileID: 5068847723652929745, guid: 8c770dd71b1831e4c8c94bfc0de327d2, type: 3}
     count: 2
     rate: 1
   - name: Wormssss
-    worm: {fileID: 0}
+    worm: {fileID: 5068847723652929745, guid: 8c770dd71b1831e4c8c94bfc0de327d2, type: 3}
     count: 3
     rate: 1.5
   - name: Wormsssss
-    worm: {fileID: 0}
+    worm: {fileID: 5068847723652929745, guid: 8c770dd71b1831e4c8c94bfc0de327d2, type: 3}
     count: 5
     rate: 2
   timeBetweenWaves: 5
