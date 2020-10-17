@@ -11452,6 +11452,21 @@ MonoBehaviour:
   - {fileID: 597447440}
   - {fileID: 2103492986}
   - {fileID: 205046508}
+  waves:
+  - name: Wormsss
+    worm: {fileID: 0}
+    count: 2
+    rate: 1
+  - name: Wormssss
+    worm: {fileID: 0}
+    count: 3
+    rate: 1.5
+  - name: Wormsssss
+    worm: {fileID: 0}
+    count: 5
+    rate: 2
+  timeBetweenWaves: 5
+  waveCountdown: 0
 --- !u!1 &320149751
 GameObject:
   m_ObjectHideFlags: 0
