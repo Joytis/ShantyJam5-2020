@@ -16,11 +16,8 @@ public class BirdMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        float horizontalMovement = Input.GetAxisRaw("Horizontal");
+        _rigidbody.AddForce(new Vector2(horizontalMovement, 0f) * Time.deltaTime);
     }
 
-    public void MoveRight()
-    {
-        _rigidbody.AddForce(new Vector2(_birdLateralSpeed, _birdLateralSpeed) * Time.deltaTime);
-    }
 }
