@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using UnityEditor;
 
@@ -23,32 +21,24 @@ public class Girthodometer : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI GirthodometerText;    
-    public GameObject PivotPoint;
 
-    // NOTE(clark): Given that we're trying to teach people, we proooobably shouldn't be using singletons here. Especially 
-    //              public static ones. Or really public fields in general. 
-    public static Girthodometer instance;
+    [SerializeField] 
+    private GameObject PivotPoint;
+
     private float GirthAmt;    
 
     [HideInInspector] [SerializeField]
     public float min = 0, max = 100;    
-    private void Awake() 
-    {
-        instance = this;
-    }
-    // Feel free to change this if we need more optimazation than an on late update
-    private void LateUpdate()
-    {
-        this.GirthodometerText.text = Mathf.RoundToInt(this.GirthAmt).ToString();
-        PivotPoint.transform.rotation = Quaternion.Euler(0,0, Mathf.Lerp(90, -90, (this.GirthAmt-min)/max-min));
-    }
+
+
+    private void OnEnable() => Consumable.ThingConsumed += OnThingConsumed;
+    private void OnDisable() => Consumable.ThingConsumed -= OnThingConsumed;
+    private void OnThingConsumed(Consumable consumable) => AddGirth(consumable.GrithValue);
 
     public void AddGirth(float amt)
     {
         this.GirthAmt += amt;
-    }
-    public void AddGirth(int amt)
-    {
-        this.GirthAmt += amt;
+        this.GirthodometerText.text = Mathf.RoundToInt(this.GirthAmt).ToString();
+        PivotPoint.transform.rotation = Quaternion.Euler(0,0, Mathf.Lerp(90, -90, (this.GirthAmt-min)/max-min));
     }
 }
