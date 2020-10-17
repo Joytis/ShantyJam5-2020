@@ -372,8 +372,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scene:
-    sceneAsset: {fileID: 102900000, guid: 52a3956a5b5deac4390bb2946fd776be, type: 3}
-    scenePath: Assets/Scenes/BIGCHONK.unity
+    sceneAsset: {fileID: 0}
+    scenePath: 
   _fader: {fileID: 11400000, guid: aa5c79bfda7cbb749980e810ec78133d, type: 2}
 --- !u!1 &452309517
 GameObject:

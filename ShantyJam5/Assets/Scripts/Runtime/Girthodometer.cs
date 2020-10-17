@@ -24,6 +24,9 @@ public class Girthodometer : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI GirthodometerText;    
     public GameObject PivotPoint;
+
+    // NOTE(clark): Given that we're trying to teach people, we proooobably shouldn't be using singletons here. Especially 
+    //              public static ones. Or really public fields in general. 
     public static Girthodometer instance;
     private float GirthAmt;    
 
