@@ -14,6 +14,7 @@ public class Consumable : MonoBehaviour
         if (coll.gameObject.tag == "Player")
         {
             Debug.Log("Consumable Consumed :)");
+            Debug.Log("Girth Value is now: " + GrithValue);
 
             ThingConsumed?.Invoke(this);
             Destroy(gameObject);
