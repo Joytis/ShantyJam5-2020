@@ -8,8 +8,7 @@ public class BirdGirth : MonoBehaviour
     public int currentHealth = 25;
     public bool gameState_Lose = false, gameState_win = false;    
     public HealthBar healthBar;    
-    public float girthAddSize = 2;
-    public float scale = 1;
+    public float girthAddSize = 1.075f, scale = 1;
 
     // Start is called before the first frame update
     void Start()
