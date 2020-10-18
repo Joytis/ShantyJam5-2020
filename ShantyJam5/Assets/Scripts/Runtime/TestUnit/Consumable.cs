@@ -4,7 +4,6 @@ using UnityEngine;
 public class Consumable : MonoBehaviour
 {
     public static event Action<Consumable> ThingConsumed;
-    public bool consumed;
 
     [SerializeField] float girthValue = 5;
     public float GrithValue => girthValue;
@@ -13,14 +12,8 @@ public class Consumable : MonoBehaviour
         if (coll.gameObject.tag == "Player")
         {
             Debug.Log("Consumable Consumed :)");
-            wormConsumed();
             ThingConsumed?.Invoke(this);
             Destroy(gameObject);
         }
-    }
-
-    public void wormConsumed()
-    {
-        consumed = true;
     }
 }
