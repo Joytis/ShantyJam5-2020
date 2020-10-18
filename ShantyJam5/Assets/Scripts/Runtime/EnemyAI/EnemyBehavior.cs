@@ -18,14 +18,17 @@ public class EnemyBehavior : MonoBehaviour
     public GameObject triggerArea;
     public Transform playerBird;
     public Consumable _consumable;
+    public GameObject _EATME;
+    public float force = 200; // How much to throw player backwards
 #endregion
 
 #region Private Variables
-    private Animator anim;
-    private float distance; // Stores distance b/w Enemy and Player
-    private bool attackMode;
-    private bool onCooldown; // Check if Enemy is in cooldown after attack
-    private float intTimer;
+    private Animator anim = default;
+    private float distance = default; // Stores distance b/w Enemy and Player
+    private bool attackMode = default;
+    private bool onCooldown = default; // Check if Enemy is in cooldown after attack
+    private float intTimer = default;
+    private BirdGirth _birdGirth = default;
 #endregion
 
     private static HashSet<EnemyBehavior> _currentEnemies = new HashSet<EnemyBehavior>();
@@ -36,6 +39,7 @@ public class EnemyBehavior : MonoBehaviour
         SelectTarget();
         intTimer = timer; // Store the initial value of timer
         anim = GetComponent<Animator>();
+        _birdGirth = playerBird.GetComponent<BirdGirth>();
     }
 
     void OnEnable() => _currentEnemies.Add(this);
@@ -65,6 +69,9 @@ public class EnemyBehavior : MonoBehaviour
         {
             EnemyLogic();
         }
+
+        _EATME.SetActive(_birdGirth.currentHealth >= _consumable.RequiredGirthToConsume);
+
     }
 
     void EnemyLogic()
@@ -111,17 +118,14 @@ public class EnemyBehavior : MonoBehaviour
         anim.SetBool("canWalk", false);
         anim.SetBool("canAttack", true);
 
-        // THROW PLAYER BACKWARDS
-        float force = 100; // How much to throw player backwards
-
         // Calculate Angle Between the collision point and the player
         var collider = triggerArea.GetComponent<Collider2D>();
         Vector3 closestPoint = collider.ClosestPoint(playerBird.position);
         Vector3 dir = (playerBird.position - transform.position).normalized;
 
-        var birdGirth = playerBird.GetComponent<BirdGirth>();
+        _birdGirth = playerBird.GetComponent<BirdGirth>();
         // Only do Attack stuff if the bird is small and WEAK. 
-        if(birdGirth.currentHealth < _consumable.RequiredGirthToConsume)
+        if(_birdGirth.currentHealth < _consumable.RequiredGirthToConsume)
         {
             // Add force in direction of dir and multiply by force
             // Push back that boiiiii

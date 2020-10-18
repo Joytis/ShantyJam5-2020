@@ -19,6 +19,8 @@ public class MusicPlayer : ScriptableObject
 
         Coroutine _currentCoroutine = null;
 
+        public AudioClip Music => _music;
+
         public CurrentMusic(GameObject prefab, AudioClip music, float fadeTime, float volume, AnimationCurve fadeCurve)
         {
             _prefab = prefab;
@@ -85,6 +87,7 @@ public class MusicPlayer : ScriptableObject
     
     public void PlayMusic(AudioClip music, float volume)
     {
+        if(_music?.Music == music) return;
         if(_music != null) _music.FadeAndDestroy();
 
         _music = new CurrentMusic(_prefab, music, _fadeTime, volume, _curve);
