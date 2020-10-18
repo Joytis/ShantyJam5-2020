@@ -32,11 +32,9 @@ public class BirdGirth : MonoBehaviour
     {
         _particlesonThingConsumed.Play();
         AddGirth(Mathf.RoundToInt(consumable.GrithValue));
-        AddSize();
     }
 
     void AddSize()
-
     {
         this.scale += girthAddSize;
         UpdateSize();
@@ -66,6 +64,10 @@ public class BirdGirth : MonoBehaviour
     
     void AddGirth(int gain)
     {
+        if(currentHealth <= maxGirth)
+        {
+            AddSize();
+        }
         ChangeHealth(gain);
         healthBar.SetHealth(currentHealth);
         CheckHealth();
