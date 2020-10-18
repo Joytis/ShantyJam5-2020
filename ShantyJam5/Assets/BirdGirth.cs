@@ -2,6 +2,7 @@
 
 public class BirdGirth : MonoBehaviour
 {
+    
     public int currentHealth = 25;
 
     public HealthBar healthBar;
