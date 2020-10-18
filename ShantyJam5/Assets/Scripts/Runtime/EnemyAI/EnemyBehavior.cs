@@ -130,9 +130,6 @@ public class EnemyBehavior : MonoBehaviour
 
             // AFFECT PLAYER GIRTH
             playerBird.GetComponent<BirdGirth>().TakeDamage(5);
-
-            // Put us on cooldown
-            intTimer -= Time.deltaTime;
         }
     }
 
