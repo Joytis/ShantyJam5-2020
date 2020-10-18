@@ -120,6 +120,7 @@ public class EnemyBehavior : MonoBehaviour
 
         // AFFECT PLAYER GIRTH
         playerBird.GetComponent<BirdGirth>().TakeDamage(5);
+        print("Subtracting 5 girth.");
 
     }
 
