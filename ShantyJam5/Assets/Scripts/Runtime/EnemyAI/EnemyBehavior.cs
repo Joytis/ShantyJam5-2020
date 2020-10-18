@@ -17,6 +17,7 @@ public class EnemyBehavior : MonoBehaviour
     public GameObject hotZone;
     public GameObject triggerArea;
     public Transform playerBird;
+    public Consumable _consumable;
 #endregion
 
 #region Private Variables
@@ -27,8 +28,8 @@ public class EnemyBehavior : MonoBehaviour
     private float intTimer;
 #endregion
 
-    // private List<EnemyBehavior>
-
+    private static HashSet<EnemyBehavior> _currentEnemies = new HashSet<EnemyBehavior>();
+    public static IEnumerable<EnemyBehavior> CurrentEnemies => _currentEnemies;
 
     void Awake()
     {
@@ -36,6 +37,9 @@ public class EnemyBehavior : MonoBehaviour
         intTimer = timer; // Store the initial value of timer
         anim = GetComponent<Animator>();
     }
+
+    void OnEnable() => _currentEnemies.Add(this);
+    void OnDisable() => _currentEnemies.Remove(this);
 
     // Update is called once per frame
     void Update()
@@ -113,14 +117,18 @@ public class EnemyBehavior : MonoBehaviour
         Vector3 closestPoint = collider.ClosestPoint(playerBird.position);
         Vector3 dir = (playerBird.position - transform.position).normalized;
 
-        // Add force in direction of dir and multiply by force
-        // Push back that boiiiii
-        playerBird.GetComponent<Rigidbody2D>().AddForce(dir * force);
+        var birdGirth = playerBird.GetComponent<BirdGirth>();
+        // Only do Attack stuff if the bird is small and WEAK. 
+        if(birdGirth.currentHealth < _consumable.RequiredGirthToConsume)
+        {
+            // Add force in direction of dir and multiply by force
+            // Push back that boiiiii
+            playerBird.GetComponent<Rigidbody2D>().AddForce(dir * force);
 
 
-        // AFFECT PLAYER GIRTH
-        playerBird.GetComponent<BirdGirth>().TakeDamage(5);
-
+            // AFFECT PLAYER GIRTH
+            playerBird.GetComponent<BirdGirth>().TakeDamage(5);
+        }
     }
 
     void Cooldown()

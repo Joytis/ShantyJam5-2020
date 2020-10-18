@@ -53,6 +53,7 @@ public class BirdGirth : MonoBehaviour
     }
 
     void ChangeHealth(int change) => currentHealth = Mathf.Clamp(currentHealth + change, minGirth, maxGirth);
+
     public void TakeDamage(int damage)
     {
         _impulse.GenerateImpulse();
@@ -60,12 +61,18 @@ public class BirdGirth : MonoBehaviour
         ChangeHealth(-damage);
         healthBar.SetHealth(currentHealth);
         SubtractSize();
+        CheckHealth();
     }
-
+    
     void AddGirth(int gain)
     {
         ChangeHealth(gain);
         healthBar.SetHealth(currentHealth);
+        CheckHealth();
+    }
+
+    void CheckHealth()
+    {
         if (currentHealth >= maxGirth)
         {
             gameState_win = true;
