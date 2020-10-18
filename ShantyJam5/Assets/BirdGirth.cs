@@ -10,6 +10,8 @@ public class BirdGirth : MonoBehaviour
     public HealthBar healthBar;    
     public float girthAddSize = 1.075f, scale = 1;
 
+    [SerializeField] ParticleSystem _particlesonThingConsumed = default;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +36,7 @@ public class BirdGirth : MonoBehaviour
 
     void OnThingConsumed(Consumable consumable)
     {
+        _particlesonThingConsumed.Play();
         AddGirth(Mathf.RoundToInt(consumable.GrithValue));
     }    
 
