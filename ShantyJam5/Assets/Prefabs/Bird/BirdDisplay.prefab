@@ -4979,6 +4979,7 @@ GameObject:
   - component: {fileID: 6056543309706313392}
   - component: {fileID: 6056543309706313394}
   - component: {fileID: 2377584501575898131}
+  - component: {fileID: 7124403744675407737}
   m_Layer: 0
   m_Name: BirdDisplay
   m_TagString: Untagged
@@ -5089,6 +5090,48 @@ MonoBehaviour:
   _groundChecker: {fileID: 0}
   _grassPuff: {fileID: 4112847271187620516}
   _grassPuffSound: {fileID: 8413838750385233685}
+--- !u!114 &7124403744675407737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6056543309706313393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_RawSignal: {fileID: 11400000, guid: d2032c64b34b02349b65576b27c0b88a, type: 2}
+    m_AmplitudeGain: 2.5
+    m_FrequencyGain: 1.5
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.4
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 1000
+    m_PropagationSpeed: 343
 --- !u!1 &8292074134638145264
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,16 +17,19 @@ public class EnemyBehavior : MonoBehaviour
     public GameObject hotZone;
     public GameObject triggerArea;
     public Transform playerBird;
+    public Consumable _consumable;
 #endregion
 
 #region Private Variables
     private Animator anim;
     private float distance; // Stores distance b/w Enemy and Player
     private bool attackMode;
-    private bool cooling; // Check if Enemy is in cooldown after attack
+    private bool onCooldown; // Check if Enemy is in cooldown after attack
     private float intTimer;
 #endregion
 
+    private static HashSet<EnemyBehavior> _currentEnemies = new HashSet<EnemyBehavior>();
+    public static IEnumerable<EnemyBehavior> CurrentEnemies => _currentEnemies;
 
     void Awake()
     {
@@ -34,6 +37,9 @@ public class EnemyBehavior : MonoBehaviour
         intTimer = timer; // Store the initial value of timer
         anim = GetComponent<Animator>();
     }
+
+    void OnEnable() => _currentEnemies.Add(this);
+    void OnDisable() => _currentEnemies.Remove(this);
 
     // Update is called once per frame
     void Update()
@@ -52,6 +58,9 @@ public class EnemyBehavior : MonoBehaviour
             SelectTarget();
         }
 
+        intTimer -= Time.deltaTime;
+        onCooldown = intTimer >= 0;
+
         if (inRange)
         {
             EnemyLogic();
@@ -66,14 +75,13 @@ public class EnemyBehavior : MonoBehaviour
         {
             StopAttack();
         }
-        else if (attackDistance >= distance && cooling == false)
+        else if (attackDistance >= distance && !onCooldown)
         {
             Attack();
         }
 
-        if (cooling)
+        if (!onCooldown)
         {
-            Cooldown();
             anim.SetBool("canAttack", false);
         }
     }
@@ -82,7 +90,6 @@ public class EnemyBehavior : MonoBehaviour
     void Move()
     {
         anim.SetBool("canWalk", true);
-        print("Moving!");
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Attack.anim"))
         {
             Vector2 targetPosition =
@@ -98,10 +105,9 @@ public class EnemyBehavior : MonoBehaviour
 
     void Attack()
     {
-        timer = intTimer; // Reset Timer when Player enter Attack Range
+        intTimer = timer; // Reset Timer when Player enter Attack Range
         attackMode = true; // To check if Enemy can still attack or not
 
-        print("Attacking!");
         anim.SetBool("canWalk", false);
         anim.SetBool("canAttack", true);
 
@@ -113,40 +119,24 @@ public class EnemyBehavior : MonoBehaviour
         Vector3 closestPoint = collider.ClosestPoint(playerBird.position);
         Vector3 dir = (playerBird.position - transform.position).normalized;
 
-        // Add force in direction of dir and multiply by force
-        // Push back that boiiiii
-        playerBird.GetComponent<Rigidbody2D>().AddForce(dir * force);
-
-
-        // AFFECT PLAYER GIRTH
-        playerBird.GetComponent<BirdGirth>().TakeDamage(5);
-        print("Subtracting 5 girth.");
-
-    }
-
-    void Cooldown()
-    {
-        timer -= Time.deltaTime;
-
-        if (timer <= 0 && cooling && attackMode)
+        var birdGirth = playerBird.GetComponent<BirdGirth>();
+        // Only do Attack stuff if the bird is small and WEAK. 
+        if(birdGirth.currentHealth < _consumable.RequiredGirthToConsume)
         {
-            cooling = false;
-            timer = intTimer; // Reset timer to initial value
+            // Add force in direction of dir and multiply by force
+            // Push back that boiiiii
+            playerBird.GetComponent<Rigidbody2D>().AddForce(dir * force);
+
+
+            // AFFECT PLAYER GIRTH
+            playerBird.GetComponent<BirdGirth>().TakeDamage(5);
         }
     }
 
     void StopAttack()
     {
-        // Stops attacking when out of range.
-        cooling = false;
         attackMode = false;
-        print("Stop Attack!");
         anim.SetBool("canAttack", false);
-    }
-
-    public void TriggerCooling()
-    {
-        cooling = true;
     }
 
     private bool InsideofLimits()

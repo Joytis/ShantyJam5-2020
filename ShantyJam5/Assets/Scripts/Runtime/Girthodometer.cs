@@ -20,12 +20,12 @@ public class GirthodometerGUI : Editor {
 public class Girthodometer : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI GirthodometerText;    
+    private TextMeshProUGUI GirthodometerText = default;
 
     [SerializeField] 
-    private GameObject PivotPoint;
+    private GameObject PivotPoint = default;
 
-    private float GirthAmt;    
+    private float GirthAmt = default;
 
     [HideInInspector] [SerializeField]
     public float min = 0, max = 100;    

@@ -13,7 +13,7 @@ public class BirdGroundedChecker : MonoBehaviour
     void Update()
     {
         var leftHit = Physics2D.Raycast(_bottomLeft.position, Vector2.down, _skinDistance, _groundMask);
-        var rightHit = Physics2D.Raycast(_bottomLeft.position, Vector2.down, _skinDistance, _groundMask);
+        var rightHit = Physics2D.Raycast(_bottomRight.position, Vector2.down, _skinDistance, _groundMask);
         _colliding = leftHit.collider != null || rightHit.collider != null;
     }
 }
