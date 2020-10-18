@@ -8,19 +8,12 @@ public class BirdGirth : MonoBehaviour
     public int currentHealth = 25;
     public bool gameState_Lose = false, gameState_win = false;    
     public HealthBar healthBar;    
-    public float girthAddSize = 1.075f, scale = 1;
+    public float girthAddSize = .1f, scale = 1;
+    [SerializeField] ParticleSystem _particlesonThingConsumed = default;
 
-    // Start is called before the first frame update
     void Start()
     {
         healthBar.SetHealth(currentHealth);
-        Consumable.ThingConsumed += ConsumableConsumed;
-    }
-
-    void ConsumableConsumed(Consumable c) 
-    {
-        this.scale *= girthAddSize;
-        this.transform.localScale = new Vector3(this.scale, this.scale, this.scale);
     }
 
     void OnEnable() 
@@ -34,14 +27,33 @@ public class BirdGirth : MonoBehaviour
 
     void OnThingConsumed(Consumable consumable)
     {
+        _particlesonThingConsumed.Play();
         AddGirth(Mathf.RoundToInt(consumable.GrithValue));
-    }    
+        AddSize();
+    }   
+
+    void AddSize()
+    {
+        this.scale += girthAddSize;
+        UpdateSize();
+    }
+    void SubtractSize()
+    {
+        this.scale -= girthAddSize;
+        UpdateSize();
+    }
+    void UpdateSize()
+    {        
+        scale = Mathf.Clamp(this.scale, .5f, 4);
+        this.transform.localScale = new Vector3(this.scale, this.scale, this.scale);
+    }
 
     void ChangeHealth(int change) => currentHealth = Mathf.Clamp(currentHealth + change, minGirth, maxGirth);
     void TakeDamage(int damage)
     {
         ChangeHealth(-damage);
         healthBar.SetHealth(currentHealth);
+        SubtractSize();
     }
 
     void AddGirth(int gain)
