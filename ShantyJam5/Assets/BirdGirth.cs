@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class BirdGirth : MonoBehaviour
 {
-    
+
     public int minGirth = 5;
     public int maxGirth = 100;
     public int currentHealth = 25;
-    public bool gameState_Lose = false, gameState_win = false;    
-    public HealthBar healthBar;    
+    public bool gameState_Lose = false, gameState_win = false;
+    public HealthBar healthBar;
     public float girthAddSize = .1f, scale = 1;
     [SerializeField] ParticleSystem _particlesonThingConsumed = default;
     [SerializeField] AudioSource _hurtSource = default;
@@ -19,11 +19,11 @@ public class BirdGirth : MonoBehaviour
         healthBar.SetHealth(currentHealth);
     }
 
-    void OnEnable() 
+    void OnEnable()
     {
         Consumable.ThingConsumed += OnThingConsumed;
     }
-    void OnDisable() 
+    void OnDisable()
     {
         Consumable.ThingConsumed -= OnThingConsumed;
     }
@@ -33,7 +33,7 @@ public class BirdGirth : MonoBehaviour
         _particlesonThingConsumed.Play();
         AddGirth(Mathf.RoundToInt(consumable.GrithValue));
         AddSize();
-    }   
+    }
 
     void AddSize()
 
@@ -47,7 +47,7 @@ public class BirdGirth : MonoBehaviour
         UpdateSize();
     }
     void UpdateSize()
-    {        
+    {
         scale = Mathf.Clamp(this.scale, .5f, 4);
         this.transform.localScale = new Vector3(this.scale, this.scale, this.scale);
     }
