@@ -2,6 +2,7 @@
 
 public class BirdMover : MonoBehaviour
 {
+
     [SerializeField] 
     private Rigidbody2D _rigidbody = null;
     [SerializeField] 
