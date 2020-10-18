@@ -4,9 +4,9 @@ public class BirdGirth : MonoBehaviour
 {
     
     public int currentHealth = 25;
-
+    public bool gameState_Lose = false;
+    public bool gameState_win = false;
     public HealthBar healthBar;
-    public Consumable wormAte;
 
     // Start is called before the first frame update
     void Start()
@@ -38,5 +38,13 @@ public class BirdGirth : MonoBehaviour
     {
         currentHealth += gain;
         healthBar.SetHealth(currentHealth);
+        if (currentHealth >= 100)
+        {
+            gameState_win = true;
+        }
+        if (currentHealth <= 0)
+        {
+            gameState_Lose = true;
+        }
     }
 }
