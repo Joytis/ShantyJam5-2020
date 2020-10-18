@@ -168,6 +168,23 @@ public class EnemyBehavior : MonoBehaviour
         Flip();
     }
 
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if(col.gameObject.tag == "Consumable")
+        {
+            Vector3 rotation = transform.eulerAngles;
+            rotation.y += 180f;
+            transform.eulerAngles = rotation;
+            if(target = leftLimit)
+            {
+                target = rightLimit;
+            }
+            else{
+                target = leftLimit;
+            }
+        }
+    }
+
     public void Flip()
     {
         Vector3 rotation = transform.eulerAngles;

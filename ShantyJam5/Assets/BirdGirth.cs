@@ -46,7 +46,7 @@ public class BirdGirth : MonoBehaviour
     }
     void UpdateSize()
     {
-        scale = Mathf.Clamp(this.scale, .5f, 4);
+        scale = Mathf.Clamp(this.scale, .5f, 3);
         this.transform.localScale = new Vector3(this.scale, this.scale, this.scale);
     }
 
