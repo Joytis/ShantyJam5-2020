@@ -24,7 +24,7 @@ public class EnemyBehavior : MonoBehaviour
     private Animator anim;
     private float distance; // Stores distance b/w Enemy and Player
     private bool attackMode;
-    private bool cooling; // Check if Enemy is in cooldown after attack
+    private bool onCooldown; // Check if Enemy is in cooldown after attack
     private float intTimer;
 #endregion
 
@@ -58,6 +58,9 @@ public class EnemyBehavior : MonoBehaviour
             SelectTarget();
         }
 
+        intTimer -= Time.deltaTime;
+        onCooldown = intTimer >= 0;
+
         if (inRange)
         {
             EnemyLogic();
@@ -72,14 +75,13 @@ public class EnemyBehavior : MonoBehaviour
         {
             StopAttack();
         }
-        else if (attackDistance >= distance && cooling == false)
+        else if (attackDistance >= distance && !onCooldown)
         {
             Attack();
         }
 
-        if (cooling)
+        if (!onCooldown)
         {
-            Cooldown();
             anim.SetBool("canAttack", false);
         }
     }
@@ -103,7 +105,7 @@ public class EnemyBehavior : MonoBehaviour
 
     void Attack()
     {
-        timer = intTimer; // Reset Timer when Player enter Attack Range
+        intTimer = timer; // Reset Timer when Player enter Attack Range
         attackMode = true; // To check if Enemy can still attack or not
 
         anim.SetBool("canWalk", false);
@@ -128,31 +130,16 @@ public class EnemyBehavior : MonoBehaviour
 
             // AFFECT PLAYER GIRTH
             playerBird.GetComponent<BirdGirth>().TakeDamage(5);
-        }
-    }
 
-    void Cooldown()
-    {
-        timer -= Time.deltaTime;
-
-        if (timer <= 0 && cooling && attackMode)
-        {
-            cooling = false;
-            timer = intTimer; // Reset timer to initial value
+            // Put us on cooldown
+            intTimer -= Time.deltaTime;
         }
     }
 
     void StopAttack()
     {
-        // Stops attacking when out of range.
-        cooling = false;
         attackMode = false;
         anim.SetBool("canAttack", false);
-    }
-
-    public void TriggerCooling()
-    {
-        cooling = true;
     }
 
     private bool InsideofLimits()
