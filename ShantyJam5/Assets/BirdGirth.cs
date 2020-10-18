@@ -28,7 +28,7 @@ public class BirdGirth : MonoBehaviour
         AddGirth(Mathf.RoundToInt(consumable.GrithValue));
     }    
 
-    void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);

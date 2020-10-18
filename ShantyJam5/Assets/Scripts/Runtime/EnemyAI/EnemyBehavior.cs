@@ -6,37 +6,24 @@ public class EnemyBehavior : MonoBehaviour
 {
 #region Public Variables
     public float attackDistance; // Minimum distance for attack
-
     public float moveSpeed;
-
     public float timer; // Timer for cooldown between attacks
-
     public Transform leftLimit;
-
     public Transform rightLimit;
-
     [HideInInspector]
     public Transform target;
-
     [HideInInspector]
     public bool inRange;
-
     public GameObject hotZone;
-
     public GameObject triggerArea;
+    public Transform playerBird;
 #endregion
-
-
 
 #region Private Variables
     private Animator anim;
-
     private float distance; // Stores distance b/w Enemy and Player
-
     private bool attackMode;
-
     private bool cooling; // Check if Enemy is in cooldown after attack
-
     private float intTimer;
 #endregion
 
@@ -117,6 +104,23 @@ public class EnemyBehavior : MonoBehaviour
         print("Attacking!");
         anim.SetBool("canWalk", false);
         anim.SetBool("canAttack", true);
+
+        // THROW PLAYER BACKWARDS
+        float force = 100; // How much to throw player backwards
+
+        // Calculate Angle Between the collision point and the player
+        var collider = triggerArea.GetComponent<Collider2D>();
+        Vector3 closestPoint = collider.ClosestPoint(playerBird.position);
+        Vector3 dir = (playerBird.position - transform.position).normalized;
+
+        // Add force in direction of dir and multiply by force
+        // Push back that boiiiii
+        playerBird.GetComponent<Rigidbody2D>().AddForce(dir * force);
+
+
+        // AFFECT PLAYER GIRTH
+        playerBird.GetComponent<BirdGirth>().TakeDamage(5);
+
     }
 
     void Cooldown()
