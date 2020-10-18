@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2729415672239977204}
   - component: {fileID: 2779565046263265416}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WormLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4342872061613367003}
   - component: {fileID: 995555042669407091}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CinemachineImpulse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 1192878293}
   - component: {fileID: 1192878292}
   - component: {fileID: 6502442192257299612}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TestWorm
   m_TagString: Consumable
   m_Icon: {fileID: 0}
@@ -300,6 +300,7 @@ MonoBehaviour:
   _impulse: {fileID: 995555042669407091}
   _particlePrefab: {fileID: 1784096363545118545, guid: c5c327df7401b9f49812d0ae7a43a027, type: 3}
   girthValue: 5
+  requiredGirthToConsume: 0
 --- !u!95 &6502442192257299612
 Animator:
   serializedVersion: 3
@@ -330,7 +331,7 @@ GameObject:
   - component: {fileID: 321468094499406903}
   - component: {fileID: 7651079346366623377}
   - component: {fileID: 3048224398160018261}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WormPulseSparkles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5212,7 +5213,7 @@ GameObject:
   - component: {fileID: 1681544530}
   - component: {fileID: 1681544531}
   - component: {fileID: 2595207955504738538}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WormPulse
   m_TagString: Untagged
   m_Icon: {fileID: 0}

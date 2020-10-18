@@ -27,6 +27,7 @@ public class BirdDisplay : MonoBehaviour
     [SerializeField] BirdGroundedChecker _groundChecker = null;
     [SerializeField] ParticleSystem _grassPuff = null;
     [SerializeField] AudioSource _grassPuffSound = null;
+    
 
     void Awake() 
     {

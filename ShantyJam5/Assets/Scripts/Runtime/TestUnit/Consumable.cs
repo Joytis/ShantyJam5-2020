@@ -11,6 +11,7 @@ public class Consumable : MonoBehaviour
     [SerializeField] float girthValue = 5;
     [SerializeField] float requiredGirthToConsume = 0;
     public float GrithValue => girthValue;
+    public float RequiredGirthToConsume => requiredGirthToConsume;
 
     private void OnCollisionEnter2D(Collision2D coll) {
         if (coll.gameObject.tag == "Player")

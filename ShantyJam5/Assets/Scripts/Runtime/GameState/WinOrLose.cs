@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class WinOrLose : MonoBehaviour
@@ -13,12 +14,13 @@ public class WinOrLose : MonoBehaviour
     {
         if(_hasLoaded) return;
 
+        bool gameWon = EnemyBehavior.CurrentEnemies.Count() == 0;
         if(_girth.gameState_Lose) 
         {
             _hasLoaded = true;
             _fader.LoadScene(_loseScene);
         }
-        else if(_girth.gameState_win)
+        else if(gameWon)
         {
             _hasLoaded = true;
             _fader.LoadScene(_winScene);
