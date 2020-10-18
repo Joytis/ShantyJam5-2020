@@ -273,7 +273,7 @@ MonoBehaviour:
   gameState_Lose: 0
   gameState_win: 0
   healthBar: {fileID: 0}
-  girthAddSize: 1.075
+  girthAddSize: 0.1
   scale: 1
   _particlesonThingConsumed: {fileID: 3076676416824197296}
 --- !u!1 &5133723509025208045
