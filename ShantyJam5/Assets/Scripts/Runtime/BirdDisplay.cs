@@ -21,11 +21,12 @@ public class BirdDisplay : MonoBehaviour
 
     FiniteStateMachine<States, Triggers> _fsm = new FiniteStateMachine<States, Triggers>(States.Idle);
 
-    [SerializeField] 
-    private Animator _animator = null;
+    [SerializeField] private Animator _animator = null;
+    [SerializeField] private float _normalizedSpeed = 10f;
 
-    [SerializeField] 
-    private BirdGroundedChecker _groundChecker = null;
+    [SerializeField] BirdGroundedChecker _groundChecker = null;
+    [SerializeField] ParticleSystem _grassPuff = null;
+    [SerializeField] AudioSource _grassPuffSound = null;
 
     void Awake() 
     {
@@ -58,6 +59,9 @@ public class BirdDisplay : MonoBehaviour
 
         if(_groundChecker.IsColliding) _fsm.SetTrigger(Triggers.Grounded);
         else _fsm.SetTrigger(Triggers.Airborne);
+
+        // Update animator speed with velocity. 
+        _animator.speed = rigidbody.velocity.magnitude / _normalizedSpeed;
     }
 
     void Update() 
@@ -65,5 +69,12 @@ public class BirdDisplay : MonoBehaviour
         _fsm.Update(Time.deltaTime);
         Debug.Log(_fsm.CurrentState);
     }
+
+    // NOTE(clark): USED BY ANIMATOR
+    public void PlayGrassPuff() 
+    {
+        _grassPuff.Play();
+        _grassPuffSound.Play();
+    } 
 
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BirdGirth : MonoBehaviour
 {
@@ -18,14 +16,28 @@ public class BirdGirth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            TakeDamage(5);
-        }
-        if (Input.GetKeyDown(KeyCode.Backspace))
-        {
-            AddGirth(5);
-        }
+        // if (Input.GetKeyDown(KeyCode.Space)) {
+        //     TakeDamage(5);
+        // }
+        // if (Input.GetKeyDown(KeyCode.Backspace))
+        // {
+        //     AddGirth(5);
+        // }
     }
+
+    void OnEnable() 
+    {
+        Consumable.ThingConsumed += OnThingConsumed;
+    }
+    void OnDisable() 
+    {
+        Consumable.ThingConsumed -= OnThingConsumed;
+    }
+
+    void OnThingConsumed(Consumable consumable)
+    {
+        AddGirth(Mathf.RoundToInt(consumable.GrithValue));
+    }    
 
     void TakeDamage(int damage)
     {
