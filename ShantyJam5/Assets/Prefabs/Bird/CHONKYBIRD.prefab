@@ -274,7 +274,7 @@ MonoBehaviour:
   gameState_Lose: 0
   gameState_win: 0
   healthBar: {fileID: 0}
-  girthAddSize: 0.1
+  girthAddSize: 0.2
   scale: 1
   _particlesonThingConsumed: {fileID: 3076676416824197296}
   _hurtSource: {fileID: 5569471005351321031}
@@ -291,7 +291,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1909711400583491976, guid: 2bf142e8f997a04418d9920438aa1793, type: 2}
   m_audioClip: {fileID: 8300000, guid: 107479a481932df4888ed02c8df21549, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0

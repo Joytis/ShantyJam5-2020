@@ -300,7 +300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _impulse: {fileID: 995555042669407091}
   _particlePrefab: {fileID: 1784096363545118545, guid: c5c327df7401b9f49812d0ae7a43a027, type: 3}
-  girthValue: 5
+  girthValue: 7
   requiredGirthToConsume: 0
 --- !u!95 &6502442192257299612
 Animator:
