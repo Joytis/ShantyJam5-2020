@@ -267,8 +267,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 25
+  gameState_Lose: 0
+  gameState_win: 0
   healthBar: {fileID: 0}
-  wormAte: {fileID: 0}
+  girthAddSize: 1.075
+  scale: 1
 --- !u!1 &5133723509025208045
 GameObject:
   m_ObjectHideFlags: 0
@@ -5187,7 +5190,7 @@ MonoBehaviour:
   m_FalloffIntensity: 0.5
   m_Color: {r: 0.9528302, g: 0.6443935, b: 0.36405307, a: 1}
   m_Intensity: 2
-  m_LightVolumeOpacity: 0
+  m_LightVolumeOpacity: 0.02
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 1

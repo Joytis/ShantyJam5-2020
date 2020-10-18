@@ -3,10 +3,13 @@
 public class BirdGirth : MonoBehaviour
 {
     
+    public int minGirth = 5;
+    public int maxGirth = 100;
     public int currentHealth = 25;
     public bool gameState_Lose = false, gameState_win = false;    
     public HealthBar healthBar;    
-    public float girthAddSize = 2, scale;
+    public float girthAddSize = 2;
+    public float scale = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -35,21 +38,22 @@ public class BirdGirth : MonoBehaviour
         AddGirth(Mathf.RoundToInt(consumable.GrithValue));
     }    
 
+    void ChangeHealth(int change) => currentHealth = Mathf.Clamp(currentHealth + change, minGirth, maxGirth);
     void TakeDamage(int damage)
     {
-        currentHealth -= damage;
+        ChangeHealth(-damage);
         healthBar.SetHealth(currentHealth);
     }
 
     void AddGirth(int gain)
     {
-        currentHealth += gain;
+        ChangeHealth(gain);
         healthBar.SetHealth(currentHealth);
-        if (currentHealth >= 100)
+        if (currentHealth >= maxGirth)
         {
             gameState_win = true;
         }
-        if (currentHealth <= 0)
+        if (currentHealth <= minGirth)
         {
             gameState_Lose = true;
         }

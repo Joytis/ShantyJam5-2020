@@ -71748,10 +71748,6 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 376454535}
-    - target: {fileID: 3952297479516095792, guid: f21ebbdaec29d04429cff118e3e4e19b, type: 3}
-      propertyPath: m_LightVolumeOpacity
-      value: 0.02
-      objectReference: {fileID: 0}
     - target: {fileID: 5133723507859723037, guid: f21ebbdaec29d04429cff118e3e4e19b, type: 3}
       propertyPath: m_Name
       value: CHONKYBIRD
