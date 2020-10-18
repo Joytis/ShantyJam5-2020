@@ -6,13 +6,14 @@ public class MusicPlayer : ScriptableObject
 {
     public class CurrentMusic
     {
-        public GameObject prefab { get; set; }
-        public AudioClip music { get; set; }
-        public float fadeTime { get; set; }
-        public AnimationCurve fadeCurve { get; set; }
-        GameObject current { get; set; }
-        AudioSource source { get; set; }
-        DummyBinding binding { get; set; }
+        GameObject _prefab { get; set; }
+        AudioClip _music { get; set; }
+        float _fadeTime { get; set; }
+        AnimationCurve _fadeCurve { get; set; }
+
+        GameObject _current { get; set; }
+        AudioSource _source { get; set; }
+        DummyBinding _binding { get; set; }
 
         Coroutine _currentCoroutine = null;
 
@@ -20,17 +21,17 @@ public class MusicPlayer : ScriptableObject
         {
             if(_currentCoroutine != null)
             {
-                binding.StopCoroutine(_currentCoroutine);
+                _binding.StopCoroutine(_currentCoroutine);
             }
 
             IEnumerator Wrapper(IEnumerator operation)
             {
-                _currentCoroutine = binding.StartCoroutine(operation);
+                _currentCoroutine = _binding.StartCoroutine(operation);
                 yield return _currentCoroutine;
                 _currentCoroutine = null;
             }
 
-            binding.StartCoroutine(Wrapper(coroutine));
+            _binding.StartCoroutine(Wrapper(coroutine));
         }
 
         public void FadeIn() => PlayThing(FadeInRoutine());
@@ -38,17 +39,16 @@ public class MusicPlayer : ScriptableObject
 
         IEnumerator FadeInRoutine()
         {
-            yield return source.DOFade(1f, fadeTime).SetEase(fadeCurve).WaitForCompletion();
+            yield return _source.DOFade(1f, _fadeTime).SetEase(_fadeCurve).WaitForCompletion();
         }
 
         IEnumerator FadeAndDestroyRoutine()
         {
-            yield return source.DOFade(0f, fadeTime).SetEase(fadeCurve).WaitForCompletion();
+            yield return _source.DOFade(0f, _fadeTime).SetEase(_fadeCurve).WaitForCompletion();
             // Destroy()
         }
     }
 
-    
     
     public void PlayMusic(AudioClip clip, float volume)
     {
