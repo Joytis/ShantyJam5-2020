@@ -56520,8 +56520,8 @@ MonoBehaviour:
     sceneAsset: {fileID: 102900000, guid: eef634f12a65a5f4bba21b24a46b097f, type: 3}
     scenePath: Assets/Scenes/Win Scene.unity
   _loseScene:
-    sceneAsset: {fileID: 0}
-    scenePath: 
+    sceneAsset: {fileID: 102900000, guid: f15518377f591e24e8fda70703607677, type: 3}
+    scenePath: Assets/Scenes/Lose Scene.unity
   _fader: {fileID: 11400000, guid: aa5c79bfda7cbb749980e810ec78133d, type: 2}
 --- !u!4 &1278346215
 Transform:
