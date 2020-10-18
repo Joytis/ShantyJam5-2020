@@ -27,6 +27,8 @@ public class EnemyBehavior : MonoBehaviour
     private float intTimer;
 #endregion
 
+    // private List<EnemyBehavior>
+
 
     void Awake()
     {
@@ -82,7 +84,6 @@ public class EnemyBehavior : MonoBehaviour
     void Move()
     {
         anim.SetBool("canWalk", true);
-        print("Moving!");
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Attack.anim"))
         {
             Vector2 targetPosition =
@@ -101,7 +102,6 @@ public class EnemyBehavior : MonoBehaviour
         timer = intTimer; // Reset Timer when Player enter Attack Range
         attackMode = true; // To check if Enemy can still attack or not
 
-        print("Attacking!");
         anim.SetBool("canWalk", false);
         anim.SetBool("canAttack", true);
 
@@ -139,7 +139,6 @@ public class EnemyBehavior : MonoBehaviour
         // Stops attacking when out of range.
         cooling = false;
         attackMode = false;
-        print("Stop Attack!");
         anim.SetBool("canAttack", false);
     }
 

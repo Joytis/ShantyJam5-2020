@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class PlaySoundOnParticleSpawn : MonoBehaviour
 {
-    [SerializeField] ParticleSystem _particles;
-    [SerializeField] AudioSource _particleSpawnSound;
+    [SerializeField] ParticleSystem _particles = default;
+    [SerializeField] AudioSource _particleSpawnSound = default;
     int _numberOfParticles = 0;
     
     void Update()

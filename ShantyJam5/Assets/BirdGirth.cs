@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Cinemachine;
+using UnityEngine;
 
 public class BirdGirth : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class BirdGirth : MonoBehaviour
     public HealthBar healthBar;    
     public float girthAddSize = .1f, scale = 1;
     [SerializeField] ParticleSystem _particlesonThingConsumed = default;
+    [SerializeField] AudioSource _hurtSource = default;
+    [SerializeField] CinemachineImpulseSource _impulse = default;
 
     void Start()
     {
@@ -52,6 +55,8 @@ public class BirdGirth : MonoBehaviour
     void ChangeHealth(int change) => currentHealth = Mathf.Clamp(currentHealth + change, minGirth, maxGirth);
     public void TakeDamage(int damage)
     {
+        _impulse.GenerateImpulse();
+        _hurtSource.Play();
         ChangeHealth(-damage);
         healthBar.SetHealth(currentHealth);
         SubtractSize();

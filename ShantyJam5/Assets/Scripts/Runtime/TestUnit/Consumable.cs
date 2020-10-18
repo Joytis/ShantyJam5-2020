@@ -6,8 +6,8 @@ public class Consumable : MonoBehaviour
 {
     public static event Action<Consumable> ThingConsumed;
 
-    [SerializeField] CinemachineImpulseSource _impulse;
-    [SerializeField] GameObject _particlePrefab;
+    [SerializeField] CinemachineImpulseSource _impulse = default;
+    [SerializeField] GameObject _particlePrefab = default;
     [SerializeField] float girthValue = 5;
     [SerializeField] float requiredGirthToConsume = 0;
     public float GrithValue => girthValue;
@@ -17,7 +17,6 @@ public class Consumable : MonoBehaviour
         {
             if (requiredGirthToConsume < coll.gameObject.GetComponent<BirdGirth>().currentHealth)
             {
-                Debug.Log("Consumable Consumed :)");
                 _impulse.GenerateImpulse();
                 ThingConsumed?.Invoke(this);
                 var newParticle = Instantiate(_particlePrefab, transform.position, transform.rotation);

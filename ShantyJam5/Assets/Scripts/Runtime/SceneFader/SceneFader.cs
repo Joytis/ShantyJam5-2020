@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Game/SceneFader")]
 public class SceneFader : MonoBehaviour
 {
     [SerializeField] ImageMaterialFloatDriver _fadeDriver = null;

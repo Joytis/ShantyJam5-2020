@@ -5,7 +5,6 @@ using System.Collections;
 
 public class ImageMaterialFloatDriver : MonoBehaviour
 {
-    [SerializeField] Image _image = null;
     [SerializeField] string _name = null;
     [SerializeField] float _initialValue = 0f;
     [SerializeField] AnimationCurve _curve = null;
