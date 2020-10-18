@@ -28,8 +28,6 @@ public class BirdDisplay : MonoBehaviour
     [SerializeField] ParticleSystem _grassPuff = null;
     [SerializeField] AudioSource _grassPuffSound = null;
 
-
-
     void Awake() 
     {
         _fsm.AddState(States.Idle, new State() { enter = () => _animator.Play("Idle") });

@@ -1,10 +1,13 @@
 ﻿using System;
 using UnityEngine;
+using Cinemachine;
 
 public class Consumable : MonoBehaviour
 {
     public static event Action<Consumable> ThingConsumed;
 
+    [SerializeField] CinemachineImpulseSource _impulse;
+    [SerializeField] GameObject _particlePrefab;
     [SerializeField] float girthValue = 5;
     public float GrithValue => girthValue;
 
@@ -12,7 +15,10 @@ public class Consumable : MonoBehaviour
         if (coll.gameObject.tag == "Player")
         {
             Debug.Log("Consumable Consumed :)");
+            _impulse.GenerateImpulse();
             ThingConsumed?.Invoke(this);
+            var newParticle = Instantiate(_particlePrefab, transform.position, transform.rotation);
+            Destroy(newParticle, 3f);
             Destroy(gameObject);
         }
     }

@@ -76,6 +76,79 @@ MonoBehaviour:
   - {x: -0.5271363, y: 0.038682222, z: 0}
   - {x: -0.60133314, y: -0.016664505, z: 0}
   - {x: -0.5922878, y: -0.10711908, z: 0}
+--- !u!1 &1899154520971958933
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4342872061613367003}
+  - component: {fileID: 995555042669407091}
+  m_Layer: 0
+  m_Name: CinemachineImpulse
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4342872061613367003
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899154520971958933}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5068847723652929745}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &995555042669407091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899154520971958933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_RawSignal: {fileID: 11400000, guid: d2032c64b34b02349b65576b27c0b88a, type: 2}
+    m_AmplitudeGain: 2
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 1000
+    m_PropagationSpeed: 343
 --- !u!1 &2634925806702099003
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,10 +179,11 @@ Transform:
   m_GameObject: {fileID: 2634925806702099003}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.0412285, y: 4.410477, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 2729415672239977204}
   - {fileID: 7212729923328164588}
+  - {fileID: 4342872061613367003}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -223,6 +297,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77fc0bf0c6fa9524c8a881ff55a427ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _impulse: {fileID: 995555042669407091}
+  _particlePrefab: {fileID: 1784096363545118545, guid: c5c327df7401b9f49812d0ae7a43a027, type: 3}
   girthValue: 5
 --- !u!95 &6502442192257299612
 Animator:
@@ -5153,7 +5229,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.074, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: [{fileID: 321468094499406903}]
+  m_Children:
+  - {fileID: 321468094499406903}
   m_Father: {fileID: 5068847723652929745}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10013,11 +10090,10 @@ AudioSource:
   m_GameObject: {fileID: 5121620574532855738}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -1909711400583491976, guid: 2bf142e8f997a04418d9920438aa1793,
-    type: 2}
+  OutputAudioMixerGroup: {fileID: -1909711400583491976, guid: 2bf142e8f997a04418d9920438aa1793, type: 2}
   m_audioClip: {fileID: 8300000, guid: da72a45f67615bc49ada11f89d47836c, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.1
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -10166,5 +10242,5 @@ MonoBehaviour:
   _particles:
   - {fileID: 703799194409764146}
   - {fileID: 7651079346366623377}
-  _minDelay: 4
-  _maxDelay: 20
+  _minDelay: 3
+  _maxDelay: 5
