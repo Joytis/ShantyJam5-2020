@@ -33,6 +33,7 @@ public class BirdGirth : MonoBehaviour
     }   
 
     void AddSize()
+
     {
         this.scale += girthAddSize;
         UpdateSize();
@@ -49,7 +50,7 @@ public class BirdGirth : MonoBehaviour
     }
 
     void ChangeHealth(int change) => currentHealth = Mathf.Clamp(currentHealth + change, minGirth, maxGirth);
-    void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         ChangeHealth(-damage);
         healthBar.SetHealth(currentHealth);

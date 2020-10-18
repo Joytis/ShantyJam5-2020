@@ -33,5 +33,4 @@ public class BirdMover : MonoBehaviour
         bool noVertical = Mathf.Approximately(velocity.y, 0f);
         _birdDisplay.UpdateDisplay(_rigidbody);
     }
-
 }
