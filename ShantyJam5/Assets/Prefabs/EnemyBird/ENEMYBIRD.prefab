@@ -476,6 +476,8 @@ MonoBehaviour:
   triggerArea: {fileID: 6183815589568982998}
   playerBird: {fileID: 0}
   _consumable: {fileID: 4168150831898884384}
+  _EATME: {fileID: 2420151752237011601}
+  force: 400
 --- !u!1001 &1449871167871720272
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -527,6 +529,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 3857580569973180865, guid: e9b857c57b865524bbdaffcc0fef157d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8837822235285507196, guid: e9b857c57b865524bbdaffcc0fef157d, type: 3}
       propertyPath: m_Name
       value: enemyBirdDisplay
@@ -536,5 +542,10 @@ PrefabInstance:
 --- !u!4 &3814837830406967510 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2373393628957641606, guid: e9b857c57b865524bbdaffcc0fef157d, type: 3}
+  m_PrefabInstance: {fileID: 1449871167871720272}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2420151752237011601 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3857580569973180865, guid: e9b857c57b865524bbdaffcc0fef157d, type: 3}
   m_PrefabInstance: {fileID: 1449871167871720272}
   m_PrefabAsset: {fileID: 0}
