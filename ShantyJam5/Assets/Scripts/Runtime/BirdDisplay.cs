@@ -28,7 +28,7 @@ public class BirdDisplay : MonoBehaviour
     [SerializeField] ParticleSystem _grassPuff = null;
     [SerializeField] AudioSource _grassPuffSound = null;
 
-    
+
 
     void Awake() 
     {
@@ -69,7 +69,6 @@ public class BirdDisplay : MonoBehaviour
     void Update() 
     {
         _fsm.Update(Time.deltaTime);
-        Debug.Log(_fsm.CurrentState);
     }
 
     // NOTE(clark): USED BY ANIMATOR
